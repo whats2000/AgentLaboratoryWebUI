@@ -1,0 +1,64 @@
+name: deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache Primes
+        id: cache-primes
+        uses: actions/cache@v4
+        with:
+          path: cache-images
+          key: cache-images
+
+      - name: Setup Node.js v20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: yarn
+
+      - name: Install
+        run: |
+          yarn install
+          yarn add sharp --ignore-engines
+        working-directory: webapp/
+
+      - name: Build
+        run: yarn build
+        env:
+          BASE_URL: /AgentLaboratoryWebUI/
+        working-directory: webapp/
+
+      - name: deploy
+        run: |
+          cd dist
+          [ -f 404.html ] || ln -s index.html 404.html
+        working-directory: webapp/
+
+      - name: Fix permissions
+        run: |
+          chmod -c -R +rX "_site/" | while read line; do
+            echo "::warning title=Invalid file permissions automatically fixed::$line"
+          done
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'webapp/dist'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
