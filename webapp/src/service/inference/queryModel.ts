@@ -1,41 +1,31 @@
 import { t } from 'i18next';
 import { encodingForModel, getEncoding, Tiktoken } from 'js-tiktoken';
 
-import { ModelProviderType } from '@/types';
+import { LanguageModel } from '@/types';
 import { currCostEst } from './costEstimator';
 import { TOKENS_IN, TOKENS_OUT } from './tokensCounter';
 import { sleep } from './utils';
 
-interface generateOptions {
-  provider: ModelProviderType;
+export async function queryModel(generateOptions: {
+  languageModel: LanguageModel;
   prompt: string;
   systemPrompt: string;
-  modelName: string;
-  baseURL: string;
-  apiKey: string;
   temperature?: number;
   tries?: number;
   timeout?: number;
   printCostCallback?: (costFeedback: string) => void;
-}
-
-export async function queryModel(
-  generateOptions: generateOptions,
-): Promise<string> {
+}): Promise<string> {
   const {
-    provider,
+    languageModel: { apiKey, provider, modelName, baseURL },
     prompt,
     systemPrompt,
-    modelName,
-    baseURL,
-    apiKey,
     temperature,
     tries = 5,
     timeout = 5.0,
     printCostCallback,
   } = generateOptions;
 
-  if (generateOptions.provider !== 'ollama' && apiKey === '') {
+  if (provider !== 'ollama' && apiKey === '') {
     throw new Error('API Not Found');
   }
 
