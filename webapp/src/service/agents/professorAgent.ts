@@ -122,6 +122,7 @@ export class ProfessorAgent extends BaseAgent {
 
   /**
    * Returns a string describing the professor's role.
+   * @returns The role description.
    */
   roleDescription(): string {
     // TODO: Make this more dynamic.
