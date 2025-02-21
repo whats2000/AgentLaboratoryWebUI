@@ -1,4 +1,3 @@
-// src/ConfigurationPage.tsx
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import {
@@ -31,9 +30,11 @@ const { Panel } = Collapse;
 
 // Optional styled container for layout
 const Container = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
   padding: 24px;
+  background: ${(props) => (props.theme.isDark ? '#1f1f1f' : '#fff')};
+  min-height: calc(100vh - 64px); // Account for header height
+  border-radius: 8px;
+  margin: 24px;
 `;
 
 // Interface for the form values (client-side keys)
@@ -145,8 +146,6 @@ const ConfigurationPage: React.FC = () => {
 
   return (
     <Container>
-      <Title level={2}>Agent Laboratory Configuration</Title>
-
       <Form<FormValues>
         form={form}
         layout='vertical'

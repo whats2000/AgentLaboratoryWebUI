@@ -33,3 +33,7 @@ export const AVAILABLE_LANGUAGES = [
   'Farsi',
   'Italian',
 ];
+
+// Gradio use soft orange as primary color
+export const defaultPrimaryColor = '#fdba74';
+export const defaultPrimaryColorDark = '#ea580c';
