@@ -22,7 +22,11 @@ export const getSettings = async (): Promise<SettingsData> => {
 };
 
 export const saveSettings = async (payload: ResearchPayload) => {
-  await axios.post(`${API_URL}/api/settings`, payload);
+  await axios.post(`${API_URL}/api/settings`, {
+    ...DEFAULT_SETTINGS,
+    ...payload,
+  });
+
   void message.success('Settings saved automatically', 0.5);
 };
 
@@ -37,6 +41,7 @@ export const getSaves = async (): Promise<SavesResponse> => {
 export const postResearch = async (
   payload: ResearchPayload,
 ): Promise<ResearchResponse> => {
+  await saveSettings(payload);
   const response = await axios.post<ResearchResponse>(
     `${API_URL}/api/research`,
     payload,

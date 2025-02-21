@@ -369,13 +369,14 @@ const ConfigurationPage: React.FC = () => {
             </Divider>
 
             <Space direction={'vertical'} style={{ width: '100%' }}>
-              <Form.Item
-                name='existingSaves'
-                label='Select Saved Research State'
-              >
-                <Row gutter={12}>
-                  <Col span={16}>
-                    <Select>
+              <Row gutter={12} align={'bottom'} style={{ marginBottom: 16 }}>
+                <Col span={16}>
+                  <Form.Item
+                    name='existingSaves'
+                    label='Select Saved Research State'
+                    style={{ width: '100%', marginBottom: 0 }}
+                  >
+                    <Select style={{ width: '100%' }}>
                       {savedStates.length > 0 ? (
                         savedStates.map((item: string) => (
                           <Select.Option key={item} value={item}>
@@ -388,14 +389,14 @@ const ConfigurationPage: React.FC = () => {
                         </Select.Option>
                       )}
                     </Select>
-                  </Col>
-                  <Col span={8}>
-                    <Button onClick={handleRefreshSaves} block={true}>
-                      Refresh Saved States
-                    </Button>
-                  </Col>
-                </Row>
-              </Form.Item>
+                  </Form.Item>
+                </Col>
+                <Col span={8}>
+                  <Button onClick={handleRefreshSaves} block={true}>
+                    Refresh Saved States
+                  </Button>
+                </Col>
+              </Row>
               <Form.Item name='loadExisting' valuePropName='checked'>
                 <Checkbox>Load Existing Research State</Checkbox>
               </Form.Item>
