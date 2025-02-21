@@ -14,6 +14,7 @@ import {
   Divider,
   Space,
   message,
+  Alert,
 } from 'antd';
 import { getSaves, getSettings, postResearch } from '@/api';
 import {
@@ -24,7 +25,6 @@ import {
 } from '@/types';
 import { AVAILABLE_LANGUAGES, AVAILABLE_MODELS } from '@/config';
 
-const { Title } = Typography;
 const { TextArea } = Input;
 const { Panel } = Collapse;
 
@@ -154,19 +154,32 @@ const ConfigurationPage: React.FC = () => {
         <Row gutter={24}>
           {/* Left Column: Basic Configuration */}
           <Col xs={24} md={12}>
-            <Title level={4}>Basic Configuration</Title>
-            <Form.Item
-              label='Research Topic'
-              name='researchTopic'
-              rules={[
-                { required: true, message: 'Please enter a research topic' },
-              ]}
-            >
-              <TextArea
-                placeholder='Enter your research idea...'
-                autoSize={{ minRows: 3, maxRows: 6 }}
-              />
-            </Form.Item>
+            <Divider>
+              <Typography.Text>LLM Configuration</Typography.Text>
+            </Divider>
+
+            <Row gutter={12}>
+              <Col span={12}>
+                <Form.Item label='LLM Backend' name='llmBackend'>
+                  <Select
+                    options={AVAILABLE_MODELS.map((model) => ({
+                      label: model,
+                      value: model,
+                    }))}
+                  />
+                </Form.Item>
+              </Col>
+              <Col span={12}>
+                <Form.Item label='Language' name='language'>
+                  <Select
+                    options={AVAILABLE_LANGUAGES.map((lang) => ({
+                      label: lang,
+                      value: lang,
+                    }))}
+                  />
+                </Form.Item>
+              </Col>
+            </Row>
 
             <Collapse style={{ marginBottom: 16 }}>
               <Panel header='API Key Configuration' key='1'>
@@ -201,28 +214,9 @@ const ConfigurationPage: React.FC = () => {
               </Panel>
             </Collapse>
 
-            <Row gutter={12}>
-              <Col span={12}>
-                <Form.Item label='LLM Backend' name='llmBackend'>
-                  <Select
-                    options={AVAILABLE_MODELS.map((model) => ({
-                      label: model,
-                      value: model,
-                    }))}
-                  />
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item label='Language' name='language'>
-                  <Select
-                    options={AVAILABLE_LANGUAGES.map((lang) => ({
-                      label: lang,
-                      value: lang,
-                    }))}
-                  />
-                </Form.Item>
-              </Col>
-            </Row>
+            <Divider>
+              <Typography.Text>Ollama Configuration</Typography.Text>
+            </Divider>
 
             <Row gutter={12}>
               <Col span={12}>
@@ -247,22 +241,44 @@ const ConfigurationPage: React.FC = () => {
                 </Form.Item>
               </Col>
             </Row>
+
+            <Alert
+              closable={true}
+              type={'info'}
+              showIcon={true}
+              message='Instructions for Use:'
+              description={
+                <ul>
+                  <li>Fill in the research configuration.</li>
+                  <li>Optionally load a previous research state.</li>
+                  <li>For standard models: select from the LLM dropdown.</li>
+                  <li>For Ollama: set API key to 'ollama' if needed, etc.</li>
+                  <li>
+                    Click "Start Research in Terminal" to launch a new terminal.
+                  </li>
+                </ul>
+              }
+            />
           </Col>
 
           {/* Right Column: Advanced Configuration */}
           <Col xs={24} md={12}>
-            <Title level={4}>Advanced Configuration</Title>
-            <Collapse defaultActiveKey={['1']} style={{ marginBottom: 16 }}>
-              <Panel header='Instructions for Use:' key='1'>
-                <p>- Fill in the research configuration.</p>
-                <p>- Optionally load a previous research state.</p>
-                <p>- For standard models: select from the LLM dropdown.</p>
-                <p>- For Ollama: set API key to 'ollama' if needed, etc.</p>
-                <p>
-                  - Click "Start Research in Terminal" to launch a new terminal.
-                </p>
-              </Panel>
-            </Collapse>
+            <Divider>
+              <Typography.Text>Research Settings</Typography.Text>
+            </Divider>
+
+            <Form.Item
+              label='Research Topic'
+              name='researchTopic'
+              rules={[
+                { required: true, message: 'Please enter a research topic' },
+              ]}
+            >
+              <TextArea
+                placeholder='Enter your research idea...'
+                autoSize={{ minRows: 3, maxRows: 6 }}
+              />
+            </Form.Item>
 
             <Row gutter={12}>
               <Col span={12}>
@@ -307,7 +323,9 @@ const ConfigurationPage: React.FC = () => {
               </Col>
             </Row>
 
-            <Divider />
+            <Divider>
+              <Typography.Text>Saved States</Typography.Text>
+            </Divider>
 
             <Space direction={'vertical'} style={{ width: '100%' }}>
               <Form.Item
