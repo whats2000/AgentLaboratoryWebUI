@@ -1,6 +1,0 @@
-{
-  "modelProvider": {
-    "costEstimation": "Estimated cost: {{cost}} USD. Note: This is Approximate values, may not reflect true cost",
-    "costEstimationError": "Error while estimating cost: {{error}}"
-  }
-}
