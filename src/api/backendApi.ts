@@ -37,6 +37,9 @@ export const getSaves = async (): Promise<SavesResponse> => {
 export const postResearch = async (
   payload: ResearchPayload,
 ): Promise<ResearchResponse> => {
-  const response = await axios.post<ResearchResponse>('/api/research', payload);
+  const response = await axios.post<ResearchResponse>(
+    `${API_URL}/api/research`,
+    payload,
+  );
   return response.data;
 };
