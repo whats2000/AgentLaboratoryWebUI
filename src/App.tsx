@@ -34,7 +34,9 @@ function App() {
     <ThemeProvider theme={themeConfig}>
       <ConfigProvider
         theme={{
-          algorithm: isDarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
+          algorithm: [
+            isDarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
+          ],
           token: {
             colorPrimary: isDarkMode
               ? defaultPrimaryColorDark

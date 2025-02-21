@@ -34,7 +34,7 @@ const Container = styled.div`
   background: ${(props) => (props.theme.isDark ? '#1f1f1f' : '#fff')};
   min-height: calc(100vh - 64px); // Account for header height
   border-radius: 8px;
-  margin: 24px;
+  margin: 0 24px;
 `;
 
 // Interface for the form values (client-side keys)
@@ -224,23 +224,29 @@ const ConfigurationPage: React.FC = () => {
               </Col>
             </Row>
 
-            <Form.Item
-              label='Custom LLM Backend (For Ollama)'
-              name='customLlmBackend'
-            >
-              <Input placeholder='Enter your custom model string (optional)' />
-            </Form.Item>
+            <Row gutter={12}>
+              <Col span={12}>
+                <Form.Item
+                  label='Custom LLM Backend (For Ollama)'
+                  name='customLlmBackend'
+                >
+                  <Input placeholder='Enter your custom model string (optional)' />
+                </Form.Item>
+              </Col>
 
-            <Form.Item
-              label='Custom Max Tokens for Ollama'
-              name='ollamaMaxTokens'
-            >
-              <InputNumber
-                style={{ width: '100%' }}
-                min={1}
-                placeholder='2048'
-              />
-            </Form.Item>
+              <Col span={12}>
+                <Form.Item
+                  label='Custom Max Tokens for Ollama'
+                  name='ollamaMaxTokens'
+                >
+                  <InputNumber
+                    style={{ width: '100%' }}
+                    min={1}
+                    placeholder='2048'
+                  />
+                </Form.Item>
+              </Col>
+            </Row>
           </Col>
 
           {/* Right Column: Advanced Configuration */}
@@ -258,47 +264,58 @@ const ConfigurationPage: React.FC = () => {
               </Panel>
             </Collapse>
 
-            <Form.Item name='copilotMode' valuePropName='checked'>
-              <Checkbox>Enable Human-in-Loop Mode</Checkbox>
-            </Form.Item>
+            <Row gutter={12}>
+              <Col span={12}>
+                <Form.Item name='copilotMode' valuePropName='checked'>
+                  <Checkbox>Enable Human-in-Loop Mode</Checkbox>
+                </Form.Item>
+              </Col>
 
-            <Form.Item name='compileLatex' valuePropName='checked'>
-              <Checkbox>Compile LaTeX</Checkbox>
-            </Form.Item>
+              <Col span={12}>
+                <Form.Item name='compileLatex' valuePropName='checked'>
+                  <Checkbox>Compile LaTeX</Checkbox>
+                </Form.Item>
+              </Col>
+            </Row>
 
-            <Form.Item
-              label='Papers in Literature Review'
-              name='numPapersLitReview'
-            >
-              <InputNumber min={1} max={20} style={{ width: '100%' }} />
-            </Form.Item>
+            <Row gutter={12}>
+              <Col span={8}>
+                <Form.Item
+                  label='Papers in Literature Review'
+                  name='numPapersLitReview'
+                >
+                  <InputNumber min={1} max={20} style={{ width: '100%' }} />
+                </Form.Item>
+              </Col>
 
-            <Form.Item label='MLE Solver Max Steps' name='mlesolverMaxSteps'>
-              <InputNumber min={1} max={10} style={{ width: '100%' }} />
-            </Form.Item>
+              <Col span={8}>
+                <Form.Item
+                  label='MLE Solver Max Steps'
+                  name='mlesolverMaxSteps'
+                >
+                  <InputNumber min={1} max={10} style={{ width: '100%' }} />
+                </Form.Item>
+              </Col>
 
-            <Form.Item
-              label='Paper Solver Max Steps'
-              name='papersolverMaxSteps'
-            >
-              <InputNumber min={1} max={10} style={{ width: '100%' }} />
-            </Form.Item>
+              <Col span={8}>
+                <Form.Item
+                  label='Paper Solver Max Steps'
+                  name='papersolverMaxSteps'
+                >
+                  <InputNumber min={1} max={10} style={{ width: '100%' }} />
+                </Form.Item>
+              </Col>
+            </Row>
 
-            <Collapse>
-              <Panel header='Resume Previous Research' key='2'>
-                <Space direction='vertical' style={{ width: '100%' }}>
-                  <Form.Item
-                    name='loadExisting'
-                    valuePropName='checked'
-                    noStyle
-                  >
-                    <Checkbox>Load Existing Research State</Checkbox>
-                  </Form.Item>
+            <Divider />
 
-                  <Form.Item
-                    name='existingSaves'
-                    label='Select Saved Research State'
-                  >
+            <Space direction={'vertical'} style={{ width: '100%' }}>
+              <Form.Item
+                name='existingSaves'
+                label='Select Saved Research State'
+              >
+                <Row gutter={12}>
+                  <Col span={16}>
                     <Select>
                       {savedStates.length > 0 ? (
                         savedStates.map((item: string) => (
@@ -312,14 +329,18 @@ const ConfigurationPage: React.FC = () => {
                         </Select.Option>
                       )}
                     </Select>
-                  </Form.Item>
-
-                  <Button onClick={handleRefreshSaves}>
-                    Refresh Saved States
-                  </Button>
-                </Space>
-              </Panel>
-            </Collapse>
+                  </Col>
+                  <Col span={8}>
+                    <Button onClick={handleRefreshSaves} block={true}>
+                      Refresh Saved States
+                    </Button>
+                  </Col>
+                </Row>
+              </Form.Item>
+              <Form.Item name='loadExisting' valuePropName='checked'>
+                <Checkbox>Load Existing Research State</Checkbox>
+              </Form.Item>
+            </Space>
           </Col>
         </Row>
 
