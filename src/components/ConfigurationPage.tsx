@@ -101,7 +101,7 @@ const ConfigurationPage: React.FC = () => {
         console.error(err);
         void messageApi.error('Failed to load saved states');
       });
-  }, [form]);
+  }, [form, messageApi]);
 
   // Handle form submission
   const handleStartResearch = (values: FormValues): void => {

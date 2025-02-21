@@ -1,4 +1,5 @@
-export const API_URL = 'http://172.24.114.130:5000';
+export const API_URL =
+  localStorage.getItem('agent-lab.apiUrl') || 'http://localhost:5000';
 
 export const AVAILABLE_MODELS = [
   'o1',
