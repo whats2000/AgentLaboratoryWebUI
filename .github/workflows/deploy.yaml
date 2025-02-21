@@ -26,25 +26,22 @@ jobs:
         with:
           node-version: 20
           cache: yarn
-          cache-dependency-path: webapp/yarn.lock
+          cache-dependency-path: yarn.lock
 
       - name: Install
         run: |
           yarn install
           yarn add sharp --ignore-engines
-        working-directory: webapp/
 
       - name: Build
         run: yarn build
         env:
           BASE_URL: /AgentLaboratoryWebUI/
-        working-directory: webapp/
 
       - name: deploy
         run: |
           cd dist
           [ -f 404.html ] || ln -s index.html 404.html
-        working-directory: webapp/
 
       - name: Fix permissions
         run: |
@@ -58,7 +55,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'webapp/dist'
+          path: 'dist'
 
       - name: Deploy to GitHub Pages
         id: deployment
