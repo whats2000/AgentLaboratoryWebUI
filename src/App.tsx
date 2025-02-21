@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ConfigProvider, Layout, theme } from 'antd';
+import { ConfigProvider, Layout, message, theme } from 'antd';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { ThemeInterface } from '@/types';
@@ -19,10 +19,16 @@ const StyledContent = styled(Content)`
 `;
 
 function App() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [_, contextHolder] = message.useMessage();
+  const [isDarkMode, setIsDarkMode] = useState(
+    localStorage.getItem('agent-lab.dark-mode') === 'true',
+  );
 
   const handleThemeChange = (checked: boolean) => {
     setIsDarkMode(checked);
+
+    // Save the theme preference to local storage
+    localStorage.setItem('agent-lab.dark-mode', checked.toString());
   };
 
   const themeConfig: ThemeInterface = {
@@ -31,27 +37,30 @@ function App() {
   };
 
   return (
-    <ThemeProvider theme={themeConfig}>
-      <ConfigProvider
-        theme={{
-          algorithm: [
-            isDarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
-          ],
-          token: {
-            colorPrimary: isDarkMode
-              ? defaultPrimaryColorDark
-              : defaultPrimaryColor,
-          },
-        }}
-      >
-        <StyledLayout>
-          <Header isDarkMode={isDarkMode} onThemeChange={handleThemeChange} />
-          <StyledContent>
-            <ConfigurationPage />
-          </StyledContent>
-        </StyledLayout>
-      </ConfigProvider>
-    </ThemeProvider>
+    <>
+      {contextHolder}
+      <ThemeProvider theme={themeConfig}>
+        <ConfigProvider
+          theme={{
+            algorithm: [
+              isDarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
+            ],
+            token: {
+              colorPrimary: isDarkMode
+                ? defaultPrimaryColorDark
+                : defaultPrimaryColor,
+            },
+          }}
+        >
+          <StyledLayout>
+            <Header isDarkMode={isDarkMode} onThemeChange={handleThemeChange} />
+            <StyledContent>
+              <ConfigurationPage />
+            </StyledContent>
+          </StyledLayout>
+        </ConfigProvider>
+      </ThemeProvider>
+    </>
   );
 }
 

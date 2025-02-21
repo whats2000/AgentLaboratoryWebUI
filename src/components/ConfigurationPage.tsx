@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
+import { debounce } from 'lodash';
 import styled from 'styled-components';
 import {
   Typography,
@@ -13,16 +14,17 @@ import {
   Collapse,
   Divider,
   Space,
-  message,
   Alert,
+  message,
 } from 'antd';
-import { getSaves, getSettings, postResearch } from '@/api';
+
 import {
   ResearchPayload,
   ResearchResponse,
   SavesResponse,
   SettingsData,
 } from '@/types';
+import { getSaves, getSettings, postResearch, saveSettings } from '@/api';
 import { AVAILABLE_LANGUAGES, AVAILABLE_MODELS } from '@/config';
 
 const { TextArea } = Input;
@@ -58,6 +60,7 @@ interface FormValues {
 }
 
 const ConfigurationPage: React.FC = () => {
+  const [messageApi] = message.useMessage();
   const [form] = Form.useForm<FormValues>();
   const [savedStates, setSavedStates] = useState<string[]>([]);
   const [status, setStatus] = useState<string>('');
@@ -87,7 +90,7 @@ const ConfigurationPage: React.FC = () => {
       })
       .catch((err: Error) => {
         console.error(err);
-        void message.error('Failed to load settings');
+        void messageApi.error('Failed to load settings');
       });
 
     getSaves()
@@ -96,7 +99,7 @@ const ConfigurationPage: React.FC = () => {
       })
       .catch((err: Error) => {
         console.error(err);
-        void message.error('Failed to load saved states');
+        void messageApi.error('Failed to load saved states');
       });
   }, [form]);
 
@@ -136,13 +139,47 @@ const ConfigurationPage: React.FC = () => {
     getSaves()
       .then((res: SavesResponse) => {
         setSavedStates(res.saves);
-        void message.success('Saved states refreshed!');
+        void messageApi.success('Saved states refreshed!');
       })
       .catch((err: Error) => {
         console.error(err);
-        void message.error('Failed to refresh saved states');
+        void messageApi.error('Failed to refresh saved states');
       });
   };
+
+  // Add auto-save functionality
+  const debouncedSave = useCallback(
+    debounce((values: FormValues) => {
+      const payload: ResearchPayload = {
+        research_topic: values.researchTopic,
+        api_key: values.apiKey,
+        deepseek_api_key: values.deepseekApiKey,
+        google_api_key: values.googleApiKey,
+        anthropic_api_key: values.anthropicApiKey,
+        llm_backend: values.llmBackend,
+        custom_llm_backend: values.customLlmBackend,
+        ollama_max_tokens: values.ollamaMaxTokens,
+        language: values.language,
+        copilot_mode: values.copilotMode,
+        compile_latex: values.compileLatex,
+        num_papers_lit_review: values.numPapersLitReview,
+        mlesolver_max_steps: values.mlesolverMaxSteps,
+        papersolver_max_steps: values.papersolverMaxSteps,
+        load_existing: values.loadExisting,
+        load_existing_path: values.existingSaves,
+      };
+      saveSettings(payload).catch((err: Error) => {
+        console.error('Failed to auto-save settings:', err);
+      });
+    }, 5000),
+    [],
+  );
+
+  // Watch form changes for auto-save
+  const handleFormChange = useCallback(() => {
+    const values = form.getFieldsValue();
+    debouncedSave(values);
+  }, [form, debouncedSave]);
 
   return (
     <Container>
@@ -150,6 +187,7 @@ const ConfigurationPage: React.FC = () => {
         form={form}
         layout='vertical'
         onFinish={handleStartResearch}
+        onValuesChange={handleFormChange}
       >
         <Row gutter={24}>
           {/* Left Column: Basic Configuration */}
@@ -271,7 +309,10 @@ const ConfigurationPage: React.FC = () => {
               label='Research Topic'
               name='researchTopic'
               rules={[
-                { required: true, message: 'Please enter a research topic' },
+                {
+                  required: true,
+                  message: 'Please enter a research topic',
+                },
               ]}
             >
               <TextArea

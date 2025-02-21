@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { message } from 'antd';
 
 import {
   ResearchPayload,
@@ -18,6 +19,11 @@ export const getSettings = async (): Promise<SettingsData> => {
   } else {
     return { ...DEFAULT_SETTINGS, ...response.data };
   }
+};
+
+export const saveSettings = async (payload: ResearchPayload) => {
+  await axios.post(`${API_URL}/api/settings`, payload);
+  void message.success('Settings saved automatically', 0.5);
 };
 
 export const getSaves = async (): Promise<SavesResponse> => {
