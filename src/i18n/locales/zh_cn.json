@@ -1,0 +1,51 @@
+{
+  "header": {
+    "title": "智能代理实验室配置"
+  },
+  "settings": {
+    "title": "设置",
+    "apiUrl": "API 地址（连接后端）",
+    "save": "保存设置"
+  },
+  "configurationPage": {
+    "LLM Configuration": "LLM配置",
+    "LLM Backend": "LLM后端",
+    "Language": "语言",
+    "API Key Configuration": "API密钥配置",
+    "OpenAI API Key": "OpenAI API密钥",
+    "For Ollama, set API key to 'ollama'": "对于Ollama，将API密钥设置为'ollama'",
+    "Enter your OpenAI API key": "输入您的OpenAI API密钥",
+    "DeepSeek API Key (Optional)": "DeepSeek API密钥（可选）",
+    "Enter your DeepSeek API key": "输入您的DeepSeek API密钥",
+    "Google API Key (Optional)": "Google API密钥（可选）",
+    "Enter your Google API key": "输入您的Google API密钥",
+    "Anthropic API Key (Optional)": "Anthropic API密钥（可选）",
+    "Enter your Anthropic API key": "输入您的Anthropic API密钥",
+    "Ollama Configuration": "Ollama配置",
+    "Custom LLM Backend (For Ollama)": "自定义LLM后端（适用于Ollama）",
+    "Enter your custom model string (optional)": "输入您的自定义模型字符串（可选）",
+    "Custom Max Tokens for Ollama": "Ollama的自定义最大令牌数",
+    "Instructions for Use:": "使用说明:",
+    "Fill in the research configuration.": "填写研究配置.",
+    "Optionally load a previous research state.": "（可选）加载先前的研究状态.",
+    "For standard models select from the LLM dropdown.": "对于标准模型：从LLM下拉列表中选择.",
+    "For Ollama set API key to 'ollama'.": "对于Ollama：将API密钥设置为'ollama'.",
+    "Click \"Start Research in Terminal\" to launch a new terminal.": "点击“在终端中开始研究”以启动新终端.",
+    "Research Settings": "研究配置",
+    "Research Topic": "研究主题",
+    "Please enter a research topic": "请输入研究主题",
+    "Enter your research idea...": "输入你的研究想法...",
+    "Enable Human-in-Loop Mode": "启用人机协同模式",
+    "Compile LaTeX": "编译LaTeX",
+    "Papers in Literature Review": "文献综述中参考论文数",
+    "MLE Solver Max Steps": "代码求解器最大步数",
+    "Paper Solver Max Steps": "论文求解器最大步数",
+    "Saved States": "保存状态",
+    "Select Saved Research State": "选择已保存的研究状态",
+    "Refresh Saved States": "刷新保存状态",
+    "No saved states found": "未找到已保存状态",
+    "Load Existing Research State": "加载现有研究状态",
+    "Start Research in Terminal": "在终端中开始研究",
+    "Status": "状态"
+  }
+}

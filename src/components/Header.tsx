@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
-import { Layout, Switch, Button, Flex } from 'antd';
-import { BulbOutlined, BulbFilled, SettingOutlined } from '@ant-design/icons';
+import { Layout, Switch, Button, Flex, Select } from 'antd';
+import {
+  SettingOutlined,
+  SunOutlined,
+  MoonOutlined,
+  TranslationOutlined,
+} from '@ant-design/icons';
 import styled from 'styled-components';
 import SettingsDrawer from './SettingsDrawer';
+import { useTranslation } from 'react-i18next';
 
 const { Header: AntHeader } = Layout;
 
@@ -28,11 +34,27 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ isDarkMode, onThemeChange }) => {
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const { t, i18n } = useTranslation();
+
+  const handleLanguageChange = (value: string) => {
+    void i18n.changeLanguage(value);
+  };
 
   return (
     <StyledHeader>
-      <Logo>Agent Laboratory Configuration</Logo>
+      <Logo>{t('header.title')}</Logo>
       <Flex align={'center'} gap={10}>
+        <Select
+          defaultValue={i18n.language}
+          style={{ width: 200 }}
+          onChange={handleLanguageChange}
+          options={[
+            { value: 'en', label: 'English' },
+            { value: 'zh_cn', label: '简体中文' },
+            { value: 'zh_tw', label: '繁體中文' },
+          ]}
+          prefix={<TranslationOutlined />}
+        />
         <Button
           icon={<SettingOutlined />}
           type='text'
@@ -40,8 +62,8 @@ const Header: React.FC<HeaderProps> = ({ isDarkMode, onThemeChange }) => {
           onClick={() => setSettingsOpen(true)}
         />
         <Switch
-          checkedChildren={<BulbOutlined />}
-          unCheckedChildren={<BulbFilled />}
+          checkedChildren={<MoonOutlined />}
+          unCheckedChildren={<SunOutlined />}
           checked={isDarkMode}
           onChange={onThemeChange}
         />

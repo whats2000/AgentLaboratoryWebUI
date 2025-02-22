@@ -17,6 +17,7 @@ import {
   Alert,
   message,
 } from 'antd';
+import { useTranslation } from 'react-i18next';
 
 import {
   ResearchPayload,
@@ -60,6 +61,7 @@ interface FormValues {
 }
 
 const ConfigurationPage: React.FC = () => {
+  const { t } = useTranslation();
   const [messageApi] = message.useMessage();
   const [form] = Form.useForm<FormValues>();
   const [savedStates, setSavedStates] = useState<string[]>([]);
@@ -90,7 +92,7 @@ const ConfigurationPage: React.FC = () => {
       })
       .catch((err: Error) => {
         console.error(err);
-        void messageApi.error('Failed to load settings');
+        void messageApi.error(t('configurationPage.messages.loadError'));
       });
 
     getSaves()
@@ -99,9 +101,9 @@ const ConfigurationPage: React.FC = () => {
       })
       .catch((err: Error) => {
         console.error(err);
-        void messageApi.error('Failed to load saved states');
+        void messageApi.error(t('configurationPage.messages.savesError'));
       });
-  }, [form, messageApi]);
+  }, [form, messageApi, t]);
 
   // Handle form submission
   const handleStartResearch = (values: FormValues): void => {
@@ -193,12 +195,17 @@ const ConfigurationPage: React.FC = () => {
           {/* Left Column: Basic Configuration */}
           <Col xs={24} md={12}>
             <Divider>
-              <Typography.Text>LLM Configuration</Typography.Text>
+              <Typography.Text>
+                {t('configurationPage.LLM Configuration')}
+              </Typography.Text>
             </Divider>
 
             <Row gutter={12}>
               <Col span={12}>
-                <Form.Item label='LLM Backend' name='llmBackend'>
+                <Form.Item
+                  label={t('configurationPage.LLM Backend')}
+                  name='llmBackend'
+                >
                   <Select
                     options={AVAILABLE_MODELS.map((model) => ({
                       label: model,
@@ -208,7 +215,10 @@ const ConfigurationPage: React.FC = () => {
                 </Form.Item>
               </Col>
               <Col span={12}>
-                <Form.Item label='Language' name='language'>
+                <Form.Item
+                  label={t('configurationPage.Language')}
+                  name='language'
+                >
                   <Select
                     options={AVAILABLE_LANGUAGES.map((lang) => ({
                       label: lang,
@@ -220,55 +230,82 @@ const ConfigurationPage: React.FC = () => {
             </Row>
 
             <Collapse style={{ marginBottom: 16 }}>
-              <Panel header='API Key Configuration' key='1'>
+              <Panel
+                header={t('configurationPage.API Key Configuration')}
+                key='1'
+              >
                 <Form.Item
-                  label='OpenAI API Key'
+                  label={t('configurationPage.OpenAI API Key')}
                   name='apiKey'
-                  tooltip="For Ollama, set API key to 'ollama'"
+                  tooltip={t(
+                    "configurationPage.For Ollama, set API key to 'ollama'",
+                  )}
                 >
-                  <Input.Password placeholder='Enter your OpenAI API key' />
+                  <Input.Password
+                    placeholder={t(
+                      'configurationPage.Enter your OpenAI API key',
+                    )}
+                  />
                 </Form.Item>
 
                 <Form.Item
-                  label='DeepSeek API Key (Optional)'
+                  label={t('configurationPage.DeepSeek API Key (Optional)')}
                   name='deepseekApiKey'
                 >
-                  <Input.Password placeholder='Enter your DeepSeek API key' />
+                  <Input.Password
+                    placeholder={t(
+                      'configurationPage.Enter your DeepSeek API key',
+                    )}
+                  />
                 </Form.Item>
 
                 <Form.Item
-                  label='Google API Key (Optional)'
+                  label={t('configurationPage.Google API Key (Optional)')}
                   name='googleApiKey'
                 >
-                  <Input.Password placeholder='Enter your Google API key' />
+                  <Input.Password
+                    placeholder={t(
+                      'configurationPage.Enter your Google API key',
+                    )}
+                  />
                 </Form.Item>
 
                 <Form.Item
-                  label='Anthropic API Key (Optional)'
+                  label={t('configurationPage.Anthropic API Key (Optional)')}
                   name='anthropicApiKey'
                 >
-                  <Input.Password placeholder='Enter your Anthropic API key' />
+                  <Input.Password
+                    placeholder={t(
+                      'configurationPage.Enter your Anthropic API key',
+                    )}
+                  />
                 </Form.Item>
               </Panel>
             </Collapse>
 
             <Divider>
-              <Typography.Text>Ollama Configuration</Typography.Text>
+              <Typography.Text>
+                {t('configurationPage.Ollama Configuration')}
+              </Typography.Text>
             </Divider>
 
             <Row gutter={12}>
               <Col span={12}>
                 <Form.Item
-                  label='Custom LLM Backend (For Ollama)'
+                  label={t('configurationPage.Custom LLM Backend (For Ollama)')}
                   name='customLlmBackend'
                 >
-                  <Input placeholder='Enter your custom model string (optional)' />
+                  <Input
+                    placeholder={t(
+                      'configurationPage.Enter your custom model string (optional)',
+                    )}
+                  />
                 </Form.Item>
               </Col>
 
               <Col span={12}>
                 <Form.Item
-                  label='Custom Max Tokens for Ollama'
+                  label={t('configurationPage.Custom Max Tokens for Ollama')}
                   name='ollamaMaxTokens'
                 >
                   <InputNumber
@@ -284,16 +321,24 @@ const ConfigurationPage: React.FC = () => {
               closable={true}
               type={'info'}
               showIcon={true}
-              message='Instructions for Use:'
+              message={t('configurationPage.Instructions for Use:')}
               description={
                 <ul>
-                  <li>Fill in the research configuration.</li>
-                  <li>Optionally load a previous research state.</li>
-                  <li>For standard models: select from the LLM dropdown.</li>
-                  <li>For Ollama: set API key to 'ollama' if needed, etc.</li>
-                  <li>
-                    Click "Start Research in Terminal" to launch a new terminal.
-                  </li>
+                  {[
+                    t('configurationPage.Fill in the research configuration.'),
+                    t(
+                      'configurationPage.Optionally load a previous research state.',
+                    ),
+                    t(
+                      'configurationPage.For standard models select from the LLM dropdown.',
+                    ),
+                    t("configurationPage.For Ollama set API key to 'ollama'."),
+                    t(
+                      'configurationPage.Click "Start Research in Terminal" to launch a new terminal.',
+                    ),
+                  ].map((text, index) => (
+                    <li key={index}>{text}</li>
+                  ))}
                 </ul>
               }
             />
@@ -302,21 +347,23 @@ const ConfigurationPage: React.FC = () => {
           {/* Right Column: Advanced Configuration */}
           <Col xs={24} md={12}>
             <Divider>
-              <Typography.Text>Research Settings</Typography.Text>
+              <Typography.Text>
+                {t('configurationPage.Research Settings')}
+              </Typography.Text>
             </Divider>
 
             <Form.Item
-              label='Research Topic'
+              label={t('configurationPage.Research Topic')}
               name='researchTopic'
               rules={[
                 {
                   required: true,
-                  message: 'Please enter a research topic',
+                  message: t('configurationPage.Please enter a research topic'),
                 },
               ]}
             >
               <TextArea
-                placeholder='Enter your research idea...'
+                placeholder={t('configurationPage.Enter your research idea...')}
                 autoSize={{ minRows: 3, maxRows: 6 }}
               />
             </Form.Item>
@@ -324,13 +371,15 @@ const ConfigurationPage: React.FC = () => {
             <Row gutter={12}>
               <Col span={12}>
                 <Form.Item name='copilotMode' valuePropName='checked'>
-                  <Checkbox>Enable Human-in-Loop Mode</Checkbox>
+                  <Checkbox>
+                    {t('configurationPage.Enable Human-in-Loop Mode')}
+                  </Checkbox>
                 </Form.Item>
               </Col>
 
               <Col span={12}>
                 <Form.Item name='compileLatex' valuePropName='checked'>
-                  <Checkbox>Compile LaTeX</Checkbox>
+                  <Checkbox>{t('configurationPage.Compile LaTeX')}</Checkbox>
                 </Form.Item>
               </Col>
             </Row>
@@ -338,7 +387,7 @@ const ConfigurationPage: React.FC = () => {
             <Row gutter={12}>
               <Col span={8}>
                 <Form.Item
-                  label='Papers in Literature Review'
+                  label={t('configurationPage.Papers in Literature Review')}
                   name='numPapersLitReview'
                 >
                   <InputNumber min={1} max={20} style={{ width: '100%' }} />
@@ -347,7 +396,7 @@ const ConfigurationPage: React.FC = () => {
 
               <Col span={8}>
                 <Form.Item
-                  label='MLE Solver Max Steps'
+                  label={t('configurationPage.MLE Solver Max Steps')}
                   name='mlesolverMaxSteps'
                 >
                   <InputNumber min={1} max={10} style={{ width: '100%' }} />
@@ -356,7 +405,7 @@ const ConfigurationPage: React.FC = () => {
 
               <Col span={8}>
                 <Form.Item
-                  label='Paper Solver Max Steps'
+                  label={t('configurationPage.Paper Solver Max Steps')}
                   name='papersolverMaxSteps'
                 >
                   <InputNumber min={1} max={10} style={{ width: '100%' }} />
@@ -365,7 +414,9 @@ const ConfigurationPage: React.FC = () => {
             </Row>
 
             <Divider>
-              <Typography.Text>Saved States</Typography.Text>
+              <Typography.Text>
+                {t('configurationPage.Saved States')}
+              </Typography.Text>
             </Divider>
 
             <Space direction={'vertical'} style={{ width: '100%' }}>
@@ -373,7 +424,7 @@ const ConfigurationPage: React.FC = () => {
                 <Col span={16}>
                   <Form.Item
                     name='existingSaves'
-                    label='Select Saved Research State'
+                    label={t('configurationPage.Select Saved Research State')}
                     style={{ width: '100%', marginBottom: 0 }}
                   >
                     <Select style={{ width: '100%' }}>
@@ -385,7 +436,7 @@ const ConfigurationPage: React.FC = () => {
                         ))
                       ) : (
                         <Select.Option value='No saved states found'>
-                          No saved states found
+                          {t('configurationPage.No saved states found')}
                         </Select.Option>
                       )}
                     </Select>
@@ -393,12 +444,14 @@ const ConfigurationPage: React.FC = () => {
                 </Col>
                 <Col span={8}>
                   <Button onClick={handleRefreshSaves} block={true}>
-                    Refresh Saved States
+                    {t('configurationPage.Refresh Saved States')}
                   </Button>
                 </Col>
               </Row>
               <Form.Item name='loadExisting' valuePropName='checked'>
-                <Checkbox>Load Existing Research State</Checkbox>
+                <Checkbox>
+                  {t('configurationPage.Load Existing Research State')}
+                </Checkbox>
               </Form.Item>
             </Space>
           </Col>
@@ -409,7 +462,7 @@ const ConfigurationPage: React.FC = () => {
         {/* Bottom row: Start button */}
         <Row justify='center' style={{ marginTop: 16 }}>
           <Button type='primary' htmlType='submit' block={true}>
-            Start Research in Terminal
+            {t('configurationPage.Start Research in Terminal')}
           </Button>
         </Row>
 
@@ -417,7 +470,7 @@ const ConfigurationPage: React.FC = () => {
         <Row style={{ marginTop: 24 }}>
           <Col span={24}>
             <Collapse>
-              <Panel header='Status' key='status'>
+              <Panel header={t('configurationPage.Status')} key='status'>
                 <div
                   dangerouslySetInnerHTML={{ __html: status }}
                   style={{ whiteSpace: 'pre-wrap' }}

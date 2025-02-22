@@ -1,5 +1,6 @@
 import React from 'react';
 import { Drawer, Form, Input, Button } from 'antd';
+import { useTranslation } from 'react-i18next';
 
 interface SettingsDrawerProps {
   open: boolean;
@@ -7,6 +8,7 @@ interface SettingsDrawerProps {
 }
 
 const SettingsDrawer: React.FC<SettingsDrawerProps> = ({ open, onClose }) => {
+  const { t } = useTranslation();
   const [form] = Form.useForm();
 
   const handleSubmit = (values: { apiUrl: string }) => {
@@ -24,7 +26,7 @@ const SettingsDrawer: React.FC<SettingsDrawerProps> = ({ open, onClose }) => {
 
   return (
     <Drawer
-      title='Settings'
+      title={t('settings.title')}
       placement='right'
       onClose={onClose}
       open={open}
@@ -32,7 +34,7 @@ const SettingsDrawer: React.FC<SettingsDrawerProps> = ({ open, onClose }) => {
     >
       <Form form={form} layout='vertical' onFinish={handleSubmit}>
         <Form.Item
-          label='API URL (Connect to the backend)'
+          label={t('settings.apiUrl')}
           name='apiUrl'
           rules={[{ required: true, message: 'Please input API URL!' }]}
         >
@@ -40,7 +42,7 @@ const SettingsDrawer: React.FC<SettingsDrawerProps> = ({ open, onClose }) => {
         </Form.Item>
         <Form.Item>
           <Button type='primary' htmlType='submit' block>
-            Save Settings
+            {t('settings.save')}
           </Button>
         </Form.Item>
       </Form>

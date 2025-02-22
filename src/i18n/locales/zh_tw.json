@@ -1,0 +1,51 @@
+{
+  "header": {
+    "title": "智慧代理實驗室配置"
+  },
+  "settings": {
+    "title": "設定",
+    "apiUrl": "API 地址（連接後端）",
+    "save": "儲存設定"
+  },
+  "configurationPage": {
+    "LLM Configuration": "LLM配置",
+    "LLM Backend": "LLM後端",
+    "Language": "語言",
+    "API Key Configuration": "API金鑰配置",
+    "OpenAI API Key": "OpenAI API金鑰",
+    "For Ollama, set API key to 'ollama'": "對於Ollama，將API金鑰設定為'ollama'",
+    "Enter your OpenAI API key": "輸入您的OpenAI API金鑰",
+    "DeepSeek API Key (Optional)": "DeepSeek API金鑰（可選）",
+    "Enter your DeepSeek API key": "輸入您的DeepSeek API金鑰",
+    "Google API Key (Optional)": "Google API金鑰（可選）",
+    "Enter your Google API key": "輸入您的Google API金鑰",
+    "Anthropic API Key (Optional)": "Anthropic API金鑰（可選）",
+    "Enter your Anthropic API key": "輸入您的Anthropic API金鑰",
+    "Ollama Configuration": "Ollama配置",
+    "Custom LLM Backend (For Ollama)": "自定義LLM後端（適用於Ollama）",
+    "Enter your custom model string (optional)": "輸入您的自定義模型字串（可選）",
+    "Custom Max Tokens for Ollama": "Ollama的自定義最大令牌數",
+    "Instructions for Use:": "使用說明:",
+    "Fill in the research configuration.": "填寫研究配置.",
+    "Optionally load a previous research state.": "（可選）載入先前的研究狀態.",
+    "For standard models select from the LLM dropdown.": "對於標準模型：從LLM下拉式選單中選擇.",
+    "For Ollama set API key to 'ollama'.": "對於Ollama：將API金鑰設定為'ollama'.",
+    "Click \"Start Research in Terminal\" to launch a new terminal.": "點擊“在終端中開始研究”以啟動新終端.",
+    "Research Settings": "研究設定",
+    "Research Topic": "研究主題",
+    "Please enter a research topic": "請輸入研究主題",
+    "Enter your research idea...": "輸入你的研究想法...",
+    "Enable Human-in-Loop Mode": "啟用人機協同模式",
+    "Compile LaTeX": "編譯LaTeX",
+    "Papers in Literature Review": "文獻綜述中參考論文數",
+    "MLE Solver Max Steps": "程式碼求解器最大步數",
+    "Paper Solver Max Steps": "論文求解器最大步數",
+    "Saved States": "儲存狀態",
+    "Select Saved Research State": "選擇已儲存的研究狀態",
+    "Refresh Saved States": "重新整理儲存狀態",
+    "No saved states found": "未找到已儲存狀態",
+    "Load Existing Research State": "載入現有研究狀態",
+    "Start Research in Terminal": "在終端中開始研究",
+    "Status": "狀態"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "header": {
+    "title": "Agent Laboratory Configuration"
+  },
+  "settings": {
+    "title": "Settings",
+    "apiUrl": "API URL (Connect to the backend)",
+    "save": "Save Settings"
+  },
+  "configurationPage": {
+    "LLM Configuration": "LLM Configuration",
+    "LLM Backend": "LLM Backend",
+    "Language": "Language",
+    "API Key Configuration": "API Key Configuration",
+    "OpenAI API Key": "OpenAI API Key",
+    "For Ollama, set API key to 'ollama'": "For Ollama, set API key to 'ollama'",
+    "Enter your OpenAI API key": "Enter your OpenAI API key",
+    "DeepSeek API Key (Optional)": "DeepSeek API Key (Optional)",
+    "Enter your DeepSeek API key": "Enter your DeepSeek API key",
+    "Google API Key (Optional)": "Google API Key (Optional)",
+    "Enter your Google API key": "Enter your Google API key",
+    "Anthropic API Key (Optional)": "Anthropic API Key (Optional)",
+    "Enter your Anthropic API key": "Enter your Anthropic API key",
+    "Ollama Configuration": "Ollama Configuration",
+    "Custom LLM Backend (For Ollama)": "Custom LLM Backend (For Ollama)",
+    "Enter your custom model string (optional)": "Enter your custom model string (optional)",
+    "Custom Max Tokens for Ollama": "Custom Max Tokens for Ollama",
+    "Instructions for Use:": "Instructions for Use:",
+    "Fill in the research configuration.": "Fill in the research configuration.",
+    "Optionally load a previous research state.": "Optionally load a previous research state.",
+    "For standard models select from the LLM dropdown.": "For standard models: select from the LLM dropdown.",
+    "For Ollama set API key to 'ollama'.": "For Ollama: set API key to 'ollama'.",
+    "Click \"Start Research in Terminal\" to launch a new terminal.": "Click \"Start Research in Terminal\" to launch a new terminal.",
+    "Research Settings": "Research Settings",
+    "Research Topic": "Research Topic",
+    "Please enter a research topic": "Please enter a research topic",
+    "Enter your research idea...": "Enter your research idea...",
+    "Enable Human-in-Loop Mode": "Enable Human-in-Loop Mode",
+    "Compile LaTeX": "Compile LaTeX",
+    "Papers in Literature Review": "Papers in Literature Review",
+    "MLE Solver Max Steps": "MLE Solver Max Steps",
+    "Paper Solver Max Steps": "Paper Solver Max Steps",
+    "Saved States": "Saved States",
+    "Select Saved Research State": "Select Saved Research State",
+    "Refresh Saved States": "Refresh Saved States",
+    "No saved states found": "No saved states found",
+    "Load Existing Research State": "Load Existing Research State",
+    "Start Research in Terminal": "Start Research in Terminal",
+    "Status": "Status"
+  }
+}
