@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { ConfigProvider, Layout, message, theme } from 'antd';
 import styled, { ThemeProvider } from 'styled-components';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import { ThemeInterface } from '@/types';
-import { defaultPrimaryColor, defaultPrimaryColorDark } from '@/config';
-import ConfigurationPage from '#/ConfigurationPage.tsx';
+import { defaultPrimaryColor, defaultPrimaryColorDark } from '@/config.ts';
+import ConfigurationPage from '@/page/ConfigurationPage.tsx';
 import Header from '#/Header.tsx';
 
 const { Content } = Layout;
@@ -52,12 +53,20 @@ function App() {
             },
           }}
         >
-          <StyledLayout>
-            <Header isDarkMode={isDarkMode} onThemeChange={handleThemeChange} />
-            <StyledContent>
-              <ConfigurationPage />
-            </StyledContent>
-          </StyledLayout>
+          <BrowserRouter>
+            <StyledLayout>
+              <Header
+                isDarkMode={isDarkMode}
+                onThemeChange={handleThemeChange}
+              />
+              <StyledContent>
+                <Routes>
+                  <Route path='/config' element={<ConfigurationPage />} />
+                  <Route path='*' element={<Navigate to='/config' replace />} />
+                </Routes>
+              </StyledContent>
+            </StyledLayout>
+          </BrowserRouter>
         </ConfigProvider>
       </ThemeProvider>
     </>
