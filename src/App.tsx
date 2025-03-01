@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import { ThemeInterface } from '@/types';
 import { defaultPrimaryColor, defaultPrimaryColorDark } from '@/config';
+import { getBaseUrl } from '@/utils';
 import Header from '#/Header';
 import ConfigurationPage from '@/page/ConfigurationPage';
 import MonitorPage from '@/page/MonitorPage';
@@ -54,7 +55,7 @@ function App() {
             },
           }}
         >
-          <BrowserRouter>
+          <BrowserRouter basename={getBaseUrl()}>
             <StyledLayout>
               <Header
                 isDarkMode={isDarkMode}
