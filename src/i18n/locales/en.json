@@ -1,6 +1,6 @@
 {
   "header": {
-    "title": "Agent Laboratory Configuration"
+    "title": "Agent Laboratory WebUI"
   },
   "navigation": {
     "setup": "Setup & Configure",
@@ -10,6 +10,15 @@
     "title": "Settings",
     "apiUrl": "API URL (Connect to the backend)",
     "save": "Save Settings"
+  },
+  "version": {
+    "current": "Current version",
+    "newVersion": "New version available",
+    "download": "Update",
+    "updateAvailable": "Update Available",
+    "updateDescription": "A new version ({{latest}}) is available. You are using version {{current}}.",
+    "releaseDate": "Release date",
+    "unknown": "Unknown"
   },
   "configurationPage": {
     "LLM Configuration": "LLM Configuration",

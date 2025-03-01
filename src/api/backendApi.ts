@@ -48,3 +48,11 @@ export const postResearch = async (
   );
   return response.data;
 };
+
+export const updateWebUI = async () => {
+  try {
+    await axios.post(`${API_URL}/api/updateWebUI`);
+  } catch (error) {
+    console.error('Error updating web UI:', error);
+  }
+};

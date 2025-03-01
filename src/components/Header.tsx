@@ -13,6 +13,7 @@ import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import SettingsDrawer from './SettingsDrawer';
+import VersionChecker from './VersionChecker';
 
 const { Header: AntHeader } = Layout;
 
@@ -24,6 +25,8 @@ const StyledHeader = styled(AntHeader)`
   background: ${(props) => (props.theme.isDark ? '#141414' : '#fff')};
   color: ${(props) => (props.theme.isDark ? '#fff' : '#000')};
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  flex-wrap: wrap;
+  height: auto;
 `;
 
 const Logo = styled.div`
@@ -88,9 +91,10 @@ const Header: React.FC<HeaderProps> = ({ isDarkMode, onThemeChange }) => {
         />
       </HeaderSection>
       <Flex align={'center'} gap={10}>
+        <VersionChecker />
         <Select
           defaultValue={i18n.language}
-          style={{ width: 200 }}
+          style={{ width: 150 }}
           onChange={handleLanguageChange}
           options={[
             { value: 'en', label: 'English' },

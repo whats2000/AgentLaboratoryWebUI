@@ -1,1 +1,2 @@
-export * from './backendApi.ts';
+export * from './backendApi';
+export * from './versionApi';

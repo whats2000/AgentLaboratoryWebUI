@@ -1,6 +1,9 @@
 export const API_URL =
   localStorage.getItem('agent-lab.apiUrl') || 'http://localhost:5000';
 
+export const VERSION_FILE_URL =
+  'https://whats2000.github.io/AgentLaboratoryWebUI/version.json';
+
 export const AVAILABLE_MODELS = [
   'o1',
   'o1-preview',

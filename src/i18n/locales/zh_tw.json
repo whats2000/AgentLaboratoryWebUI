@@ -1,6 +1,6 @@
 {
   "header": {
-    "title": "智慧代理實驗室配置"
+    "title": "智慧代理實驗室 WebUI"
   },
   "navigation": {
     "setup": "設置與配置",
@@ -10,6 +10,15 @@
     "title": "設定",
     "apiUrl": "API 地址（連接後端）",
     "save": "儲存設定"
+  },
+  "version": {
+    "current": "當前版本",
+    "newVersion": "新版本可用",
+    "download": "更新",
+    "updateAvailable": "可用更新",
+    "updateDescription": "新版本（{{latest}}）可用。您正在使用版本 {{current}}。",
+    "releaseDate": "發布日期",
+    "unknown": "未知"
   },
   "configurationPage": {
     "LLM Configuration": "LLM配置",
