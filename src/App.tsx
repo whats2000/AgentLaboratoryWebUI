@@ -4,9 +4,10 @@ import styled, { ThemeProvider } from 'styled-components';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import { ThemeInterface } from '@/types';
-import { defaultPrimaryColor, defaultPrimaryColorDark } from '@/config.ts';
-import ConfigurationPage from '@/page/ConfigurationPage.tsx';
-import Header from '#/Header.tsx';
+import { defaultPrimaryColor, defaultPrimaryColorDark } from '@/config';
+import Header from '#/Header';
+import ConfigurationPage from '@/page/ConfigurationPage';
+import MonitorPage from '@/page/MonitorPage';
 
 const { Content } = Layout;
 
@@ -62,7 +63,7 @@ function App() {
               <StyledContent>
                 <Routes>
                   <Route path='/config' element={<ConfigurationPage />} />
-                  <Route path='/monitor' element={<ConfigurationPage />} />
+                  <Route path='/monitor' element={<MonitorPage />} />
                   <Route path='*' element={<Navigate to='/config' replace />} />
                 </Routes>
               </StyledContent>
