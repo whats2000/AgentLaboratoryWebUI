@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
-import { Layout, Switch, Button, Flex, Select } from 'antd';
+import { Layout, Switch, Button, Flex, Select, Menu } from 'antd';
 import {
   SettingOutlined,
   SunOutlined,
   MoonOutlined,
   TranslationOutlined,
+  PlayCircleOutlined,
+  DashboardOutlined,
 } from '@ant-design/icons';
 import styled from 'styled-components';
-import SettingsDrawer from './SettingsDrawer';
 import { useTranslation } from 'react-i18next';
+import { useLocation, useNavigate } from 'react-router-dom';
+
+import SettingsDrawer from './SettingsDrawer';
 
 const { Header: AntHeader } = Layout;
 
@@ -25,6 +29,11 @@ const StyledHeader = styled(AntHeader)`
 const Logo = styled.div`
   font-size: 1.2rem;
   font-weight: bold;
+  margin-right: 24px;
+`;
+
+const HeaderSection = styled(Flex)`
+  align-items: center;
 `;
 
 interface HeaderProps {
@@ -35,14 +44,49 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ isDarkMode, onThemeChange }) => {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLanguageChange = (value: string) => {
     void i18n.changeLanguage(value);
   };
 
+  const menuItems = [
+    {
+      key: '/config',
+      icon: <PlayCircleOutlined />,
+      label: t('navigation.setup'),
+    },
+    {
+      key: '/monitor',
+      icon: <DashboardOutlined />,
+      label: t('navigation.monitor'),
+    },
+  ];
+
+  const handleMenuClick = (e: { key: string }) => {
+    navigate(e.key);
+  };
+
+  const selectedKey =
+    menuItems.find((item) => location.pathname.startsWith(item.key))?.key ||
+    menuItems[0].key;
+
   return (
     <StyledHeader>
-      <Logo>{t('header.title')}</Logo>
+      <HeaderSection>
+        <Logo>{t('header.title')}</Logo>
+        <Menu
+          mode='horizontal'
+          selectedKeys={[selectedKey]}
+          onClick={handleMenuClick}
+          items={menuItems}
+          style={{
+            borderBottom: 'none',
+            minWidth: '400px',
+          }}
+        />
+      </HeaderSection>
       <Flex align={'center'} gap={10}>
         <Select
           defaultValue={i18n.language}

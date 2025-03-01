@@ -2,6 +2,10 @@
   "header": {
     "title": "智慧代理實驗室配置"
   },
+  "navigation": {
+    "setup": "設置與配置",
+    "monitor": "監控進度"
+  },
   "settings": {
     "title": "設定",
     "apiUrl": "API 地址（連接後端）",

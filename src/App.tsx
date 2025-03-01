@@ -62,6 +62,7 @@ function App() {
               <StyledContent>
                 <Routes>
                   <Route path='/config' element={<ConfigurationPage />} />
+                  <Route path='/monitor' element={<ConfigurationPage />} />
                   <Route path='*' element={<Navigate to='/config' replace />} />
                 </Routes>
               </StyledContent>

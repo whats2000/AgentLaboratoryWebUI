@@ -2,6 +2,10 @@
   "header": {
     "title": "智能代理实验室配置"
   },
+  "navigation": {
+    "setup": "设置与配置",
+    "monitor": "监控进度"
+  },
   "settings": {
     "title": "设置",
     "apiUrl": "API 地址（连接后端）",

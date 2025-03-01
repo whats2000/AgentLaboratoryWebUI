@@ -2,6 +2,10 @@
   "header": {
     "title": "Agent Laboratory Configuration"
   },
+  "navigation": {
+    "setup": "Setup & Configure",
+    "monitor": "Monitor Progress"
+  },
   "settings": {
     "title": "Settings",
     "apiUrl": "API URL (Connect to the backend)",
