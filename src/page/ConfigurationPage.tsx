@@ -385,7 +385,7 @@ const ConfigurationPage: React.FC = () => {
             </Row>
 
             <Row gutter={12}>
-              <Col span={8}>
+              <Col span={24} lg={8}>
                 <Form.Item
                   label={t('configurationPage.Papers in Literature Review')}
                   name='numPapersLitReview'
@@ -394,7 +394,7 @@ const ConfigurationPage: React.FC = () => {
                 </Form.Item>
               </Col>
 
-              <Col span={8}>
+              <Col span={24} lg={8}>
                 <Form.Item
                   label={t('configurationPage.MLE Solver Max Steps')}
                   name='mlesolverMaxSteps'
@@ -403,7 +403,7 @@ const ConfigurationPage: React.FC = () => {
                 </Form.Item>
               </Col>
 
-              <Col span={8}>
+              <Col span={24} lg={8}>
                 <Form.Item
                   label={t('configurationPage.Paper Solver Max Steps')}
                   name='papersolverMaxSteps'
@@ -420,8 +420,8 @@ const ConfigurationPage: React.FC = () => {
             </Divider>
 
             <Space direction={'vertical'} style={{ width: '100%' }}>
-              <Row gutter={12} align={'bottom'} style={{ marginBottom: 16 }}>
-                <Col span={16}>
+              <Row gutter={12} align={'bottom'}>
+                <Col span={24} lg={16} style={{ marginBottom: 16 }}>
                   <Form.Item
                     name='existingSaves'
                     label={t('configurationPage.Select Saved Research State')}
@@ -442,7 +442,7 @@ const ConfigurationPage: React.FC = () => {
                     </Select>
                   </Form.Item>
                 </Col>
-                <Col span={8}>
+                <Col span={24} lg={8} style={{ marginBottom: 16 }}>
                   <Button onClick={handleRefreshSaves} block={true}>
                     {t('configurationPage.Refresh Saved States')}
                   </Button>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Layout, Switch, Button, Flex, Select, Menu } from 'antd';
+import { Layout, Switch, Button, Flex, Select, Menu, Drawer } from 'antd';
 import {
   SettingOutlined,
   SunOutlined,
@@ -7,6 +7,7 @@ import {
   TranslationOutlined,
   PlayCircleOutlined,
   DashboardOutlined,
+  MenuOutlined,
 } from '@ant-design/icons';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
@@ -27,16 +28,53 @@ const StyledHeader = styled(AntHeader)`
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   flex-wrap: wrap;
   height: auto;
+
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
 `;
 
-const Logo = styled.div`
+const Logo = styled.h1`
   font-size: 1.2rem;
   font-weight: bold;
-  margin-right: 24px;
+  margin: 0 24px 0 0;
 `;
 
 const HeaderSection = styled(Flex)`
   align-items: center;
+`;
+
+const StyledMenu = styled(Menu)`
+  border-bottom: none;
+  min-width: 400px;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+const MobileMenuButton = styled(Button)`
+  display: none;
+  @media (max-width: 768px) {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+  }
+`;
+
+const MobileVersionChecker = styled.div`
+  display: none;
+  @media (max-width: 768px) {
+    display: flex;
+    justify-content: center;
+    margin: 16px;
+  }
+`;
+
+const VersionCheckerWrapper = styled.div`
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 interface HeaderProps {
@@ -46,6 +84,7 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ isDarkMode, onThemeChange }) => {
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
@@ -69,6 +108,7 @@ const Header: React.FC<HeaderProps> = ({ isDarkMode, onThemeChange }) => {
 
   const handleMenuClick = (e: { key: string }) => {
     navigate(e.key);
+    setMobileMenuOpen(false); // Close mobile menu after navigation
   };
 
   const selectedKey =
@@ -78,20 +118,23 @@ const Header: React.FC<HeaderProps> = ({ isDarkMode, onThemeChange }) => {
   return (
     <StyledHeader>
       <HeaderSection>
+        <MobileMenuButton
+          icon={<MenuOutlined />}
+          type='text'
+          onClick={() => setMobileMenuOpen(true)}
+        />
         <Logo>{t('header.title')}</Logo>
-        <Menu
+        <StyledMenu
           mode='horizontal'
           selectedKeys={[selectedKey]}
           onClick={handleMenuClick}
           items={menuItems}
-          style={{
-            borderBottom: 'none',
-            minWidth: '400px',
-          }}
         />
       </HeaderSection>
       <Flex align={'center'} gap={10}>
-        <VersionChecker />
+        <VersionCheckerWrapper>
+          <VersionChecker />
+        </VersionCheckerWrapper>
         <Select
           defaultValue={i18n.language}
           style={{ width: 150 }}
@@ -120,6 +163,27 @@ const Header: React.FC<HeaderProps> = ({ isDarkMode, onThemeChange }) => {
         open={settingsOpen}
         onClose={() => setSettingsOpen(false)}
       />
+
+      {/* Mobile Navigation Drawer */}
+      <Drawer
+        title={t('header.title')}
+        placement='left'
+        onClose={() => setMobileMenuOpen(false)}
+        open={mobileMenuOpen}
+        width={300}
+        styles={{ body: { padding: 0 } }}
+      >
+        <Menu
+          mode='vertical'
+          selectedKeys={[selectedKey]}
+          onClick={handleMenuClick}
+          items={menuItems}
+          style={{ border: 'none' }}
+        />
+        <MobileVersionChecker>
+          <VersionChecker />
+        </MobileVersionChecker>
+      </Drawer>
     </StyledHeader>
   );
 };
