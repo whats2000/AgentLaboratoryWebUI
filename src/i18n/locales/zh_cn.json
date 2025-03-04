@@ -43,6 +43,8 @@
     "Optionally load a previous research state.": "（可选）加载先前的研究状态.",
     "For standard models select from the LLM dropdown.": "对于标准模型：从LLM下拉列表中选择.",
     "For Ollama set API key to 'ollama'.": "对于Ollama：将API密钥设置为'ollama'.",
+    "Please ensure there exists at least one API key.": "请确保至少存在一个API密钥",
+    "Please edit the task notes for better guidance.": "请编辑任务备注以获得更好的指导",
     "Click \"Start Research in Terminal\" to launch a new terminal.": "点击“在终端中开始研究”以启动新终端.",
     "Research Settings": "研究配置",
     "Research Topic": "研究主题",
@@ -59,6 +61,40 @@
     "No saved states found": "未找到已保存状态",
     "Load Existing Research State": "加载现有研究状态",
     "Start Research in Terminal": "在终端中开始研究",
-    "Status": "状态"
+    "Status": "状态",
+    "Configure Task Notes": "配置任务备注（{{count}}）"
+  },
+  "taskNotes": {
+    "title": "任务备注配置",
+    "guidanceTooltip": "任务备注在研究特定阶段为代理提供指导",
+    "viewJsonTooltip": "查看JSON数据结构",
+    "availableVariables": "可用变量 (在备注内容中使用)",
+    "addTaskNote": "添加任务备注",
+    "saveChanges": "保存更改",
+    "unsavedChangesWarning": "您有未保存的更改。点击\"保存更改\"以应用它们。",
+    "taskNote": "任务备注",
+    "appliesToPhases": "适用阶段",
+    "selectPhases": "选择阶段",
+    "noteContent": "备注内容",
+    "enterNoteContent": "输入备注内容，可使用变量如{{research_topic}}",
+    "jsonPreviewTitle": "任务备注JSON预览",
+    "close": "关闭",
+    "researchTopic": "配置中的研究主题",
+    "apiKey": "配置中的OpenAI API密钥",
+    "deepseekApiKey": "配置中的DeepSeek API密钥",
+    "googleApiKey": "配置中的Google API密钥",
+    "anthropicApiKey": "配置中的Anthropic API密钥",
+    "language": "配置中的语言",
+    "llmBackend": "配置中的LLM后端",
+    "appliesTo": "适用于 {{count}}/{{total}} 个阶段",
+    "phases": {
+      "planformulation": "计划制定",
+      "datapreparation": "数据准备",
+      "runningexperiments": "运行实验",
+      "resultsinterpretation": "结果解释",
+      "reportwriting": "报告撰写",
+      "reportrefinement": "报告完善",
+      "literaturereview": "文献综述"
+    }
   }
 }

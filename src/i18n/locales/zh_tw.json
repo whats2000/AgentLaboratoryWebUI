@@ -43,6 +43,8 @@
     "Optionally load a previous research state.": "（可選）載入先前的研究狀態.",
     "For standard models select from the LLM dropdown.": "對於標準模型：從LLM下拉式選單中選擇.",
     "For Ollama set API key to 'ollama'.": "對於Ollama：將API金鑰設定為'ollama'.",
+    "Please ensure there exists at least one API key.": "請確保至少存在一個API金鑰",
+    "Please edit the task notes for better guidance.": "請編輯任務備註以獲得更好的指導",
     "Click \"Start Research in Terminal\" to launch a new terminal.": "點擊“在終端中開始研究”以啟動新終端.",
     "Research Settings": "研究設定",
     "Research Topic": "研究主題",
@@ -59,6 +61,40 @@
     "No saved states found": "未找到已儲存狀態",
     "Load Existing Research State": "載入現有研究狀態",
     "Start Research in Terminal": "在終端中開始研究",
-    "Status": "狀態"
+    "Status": "狀態",
+    "Configure Task Notes": "配置任務備註（{{count}}）"
+  },
+  "taskNotes": {
+    "title": "任務備註配置",
+    "guidanceTooltip": "任務備註在研究特定階段為代理提供指導",
+    "viewJsonTooltip": "檢視JSON資料結構",
+    "availableVariables": "可用變數（在備註內容中使用）",
+    "addTaskNote": "新增任務備註",
+    "saveChanges": "儲存變更",
+    "unsavedChangesWarning": "您有未儲存的變更。點擊\"儲存變更\"以套用它們。",
+    "taskNote": "任務備註",
+    "appliesToPhases": "適用階段",
+    "selectPhases": "選擇階段",
+    "noteContent": "備註內容",
+    "enterNoteContent": "輸入備註內容，可使用變數如{{research_topic}}",
+    "jsonPreviewTitle": "任務備註JSON預覽",
+    "close": "關閉",
+    "researchTopic": "配置中的研究主題",
+    "apiKey": "配置中的OpenAI API金鑰",
+    "deepseekApiKey": "配置中的DeepSeek API金鑰",
+    "googleApiKey": "配置中的Google API金鑰",
+    "anthropicApiKey": "配置中的Anthropic API金鑰",
+    "language": "配置中的語言",
+    "llmBackend": "配置中的LLM後端",
+    "appliesTo": "適用於 {{count}}/{{total}} 個階段",
+    "phases": {
+      "planformulation": "計劃制定",
+      "datapreparation": "資料準備",
+      "runningexperiments": "執行實驗",
+      "resultsinterpretation": "結果詮釋",
+      "reportwriting": "報告撰寫",
+      "reportrefinement": "報告優化",
+      "literaturereview": "文獻綜述"
+    }
   }
 }

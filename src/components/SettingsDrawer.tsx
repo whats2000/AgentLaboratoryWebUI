@@ -1,6 +1,8 @@
 import React from 'react';
-import { Drawer, Form, Input, Button } from 'antd';
+import { Drawer, Form, Input, Button, Typography } from 'antd';
 import { useTranslation } from 'react-i18next';
+
+const { Title } = Typography;
 
 interface SettingsDrawerProps {
   open: boolean;
@@ -26,7 +28,11 @@ const SettingsDrawer: React.FC<SettingsDrawerProps> = ({ open, onClose }) => {
 
   return (
     <Drawer
-      title={t('settings.title')}
+      title={
+        <Title level={4} style={{ margin: 0 }}>
+          {t('settings.title')}
+        </Title>
+      }
       placement='right'
       onClose={onClose}
       open={open}

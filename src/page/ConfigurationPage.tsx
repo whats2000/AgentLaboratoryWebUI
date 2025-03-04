@@ -18,6 +18,7 @@ import {
   message,
 } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { ReadOutlined } from '@ant-design/icons';
 
 import {
   ResearchPayload,
@@ -25,8 +26,17 @@ import {
   SavesResponse,
   SettingsData,
 } from '@/types';
-import { getSaves, getSettings, postResearch, saveSettings } from '@/api';
+import { TaskNote } from '@/types/taskNotes';
+import {
+  getSaves,
+  getSettings,
+  getTaskNotes,
+  postResearch,
+  saveSettings,
+  saveTaskNotes,
+} from '@/api';
 import { AVAILABLE_LANGUAGES, AVAILABLE_MODELS } from '@/config';
+import TaskNoteEditor from '@/components/TaskNoteEditor';
 
 const { TextArea } = Input;
 const { Panel } = Collapse;
@@ -66,6 +76,9 @@ const ConfigurationPage: React.FC = () => {
   const [form] = Form.useForm<FormValues>();
   const [savedStates, setSavedStates] = useState<string[]>([]);
   const [status, setStatus] = useState<string>('');
+  const [taskNotes, setTaskNotes] = useState<TaskNote[]>([]);
+  const [taskNoteDrawerVisible, setTaskNoteDrawerVisible] =
+    useState<boolean>(false);
 
   // Load initial settings and saved states on mount
   useEffect(() => {
@@ -102,6 +115,15 @@ const ConfigurationPage: React.FC = () => {
       .catch((err: Error) => {
         console.error(err);
         void messageApi.error(t('configurationPage.messages.savesError'));
+      });
+
+    getTaskNotes()
+      .then((notes: TaskNote[]) => {
+        setTaskNotes(notes);
+      })
+      .catch((err: Error) => {
+        console.error(err);
+        void messageApi.error('Failed to load task notes');
       });
   }, [form, messageApi, t]);
 
@@ -182,6 +204,14 @@ const ConfigurationPage: React.FC = () => {
     const values = form.getFieldsValue();
     debouncedSave(values);
   }, [form, debouncedSave]);
+
+  // Handle task notes changes
+  const handleTaskNotesChange = (updatedNotes: TaskNote[]) => {
+    setTaskNotes(updatedNotes);
+    saveTaskNotes(updatedNotes).catch((err: Error) => {
+      console.error('Failed to save task notes:', err);
+    });
+  };
 
   return (
     <Container>
@@ -334,6 +364,12 @@ const ConfigurationPage: React.FC = () => {
                     ),
                     t("configurationPage.For Ollama set API key to 'ollama'."),
                     t(
+                      'configurationPage.Please ensure there exists at least one API key.',
+                    ),
+                    t(
+                      'configurationPage.Please edit the task notes for better guidance.',
+                    ),
+                    t(
                       'configurationPage.Click "Start Research in Terminal" to launch a new terminal.',
                     ),
                   ].map((text, index) => (
@@ -413,6 +449,21 @@ const ConfigurationPage: React.FC = () => {
               </Col>
             </Row>
 
+            <Row gutter={12} style={{ marginBottom: 16 }}>
+              <Col span={24}>
+                <Button
+                  type='dashed'
+                  icon={<ReadOutlined />}
+                  onClick={() => setTaskNoteDrawerVisible(true)}
+                  block
+                >
+                  {t('configurationPage.Configure Task Notes', {
+                    count: taskNotes.length,
+                  })}
+                </Button>
+              </Col>
+            </Row>
+
             <Divider>
               <Typography.Text>
                 {t('configurationPage.Saved States')}
@@ -480,6 +531,14 @@ const ConfigurationPage: React.FC = () => {
           </Col>
         </Row>
       </Form>
+
+      {/* Task Notes Drawer */}
+      <TaskNoteEditor
+        taskNotes={taskNotes}
+        onChange={handleTaskNotesChange}
+        isOpen={taskNoteDrawerVisible}
+        onClose={() => setTaskNoteDrawerVisible(false)}
+      />
     </Container>
   );
 };

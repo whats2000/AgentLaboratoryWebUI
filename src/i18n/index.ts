@@ -14,10 +14,10 @@ void i18n
       en: {
         translation: en,
       },
-      zh_cn: {
+      zh_CN: {
         translation: zh_cn,
       },
-      zh_tw: {
+      zh_TW: {
         translation: zh_tw,
       },
     },

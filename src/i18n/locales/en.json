@@ -43,6 +43,8 @@
     "Optionally load a previous research state.": "Optionally load a previous research state.",
     "For standard models select from the LLM dropdown.": "For standard models: select from the LLM dropdown.",
     "For Ollama set API key to 'ollama'.": "For Ollama: set API key to 'ollama'.",
+    "Please ensure there exists at least one API key.": "Please ensure there exists at least one API key",
+    "Please edit the task notes for better guidance.": "Please edit the task notes for better guidance",
     "Click \"Start Research in Terminal\" to launch a new terminal.": "Click \"Start Research in Terminal\" to launch a new terminal.",
     "Research Settings": "Research Settings",
     "Research Topic": "Research Topic",
@@ -59,6 +61,40 @@
     "No saved states found": "No saved states found",
     "Load Existing Research State": "Load Existing Research State",
     "Start Research in Terminal": "Start Research in Terminal",
-    "Status": "Status"
+    "Status": "Status",
+    "Configure Task Notes": "Configure Task Notes ({{count}})"
+  },
+  "taskNotes": {
+    "title": "Task Notes Configuration",
+    "guidanceTooltip": "Task notes provide guidance to the agent during specific phases of research",
+    "viewJsonTooltip": "View JSON data structure",
+    "availableVariables": "Available variables (Use in note content)",
+    "addTaskNote": "Add Task Note",
+    "saveChanges": "Save Changes",
+    "unsavedChangesWarning": "You have unsaved changes. Click \"Save Changes\" to apply them.",
+    "taskNote": "Task Note",
+    "appliesToPhases": "Applies to Phases",
+    "selectPhases": "Select phases",
+    "noteContent": "Note Content",
+    "enterNoteContent": "Enter note content with variables like {{research_topic}}",
+    "jsonPreviewTitle": "Task Notes JSON Preview",
+    "close": "Close",
+    "researchTopic": "The research topic variable from configuration",
+    "apiKey": "The API key variable from configuration",
+    "deepseekApiKey": "The DeepSeek API key variable from configuration",
+    "googleApiKey": "The Google API key variable from configuration",
+    "anthropicApiKey": "The Anthropic API key variable from configuration",
+    "language": "The language variable from configuration",
+    "llmBackend": "The LLM backend variable from configuration",
+    "appliesTo": "Applies to {{count}}/{{total}} phases",
+    "phases": {
+      "planformulation": "Plan Formulation",
+      "datapreparation": "Data Preparation",
+      "runningexperiments": "Running Experiments",
+      "resultsinterpretation": "Results Interpretation",
+      "reportwriting": "Report Writing",
+      "reportrefinement": "Report Refinement",
+      "literaturereview": "Literature Review"
+    }
   }
 }

@@ -141,8 +141,8 @@ const Header: React.FC<HeaderProps> = ({ isDarkMode, onThemeChange }) => {
           onChange={handleLanguageChange}
           options={[
             { value: 'en', label: 'English' },
-            { value: 'zh_cn', label: '简体中文' },
-            { value: 'zh_tw', label: '繁體中文' },
+            { value: 'zh_CN', label: '简体中文' },
+            { value: 'zh_TW', label: '繁體中文' },
           ]}
           prefix={<TranslationOutlined />}
         />
