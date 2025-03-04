@@ -44,7 +44,7 @@
     "For standard models select from the LLM dropdown.": "对于标准模型：从LLM下拉列表中选择.",
     "For Ollama set API key to 'ollama'.": "对于Ollama：将API密钥设置为'ollama'.",
     "Please ensure there exists at least one API key.": "请确保至少存在一个API密钥",
-    "Please edit the task notes for better guidance.": "请编辑任务备注以获得更好的指导",
+    "Please edit the task notes for better guidance.": "请编辑任务备注以获得更好的LLM代理指导。",
     "Click \"Start Research in Terminal\" to launch a new terminal.": "点击“在终端中开始研究”以启动新终端.",
     "Research Settings": "研究配置",
     "Research Topic": "研究主题",
