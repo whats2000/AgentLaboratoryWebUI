@@ -3,7 +3,7 @@
     "title": "智慧代理實驗室 WebUI"
   },
   "navigation": {
-    "setup": "設置與配置",
+    "setup": "設置與設定",
     "monitor": "監控進度"
   },
   "settings": {
@@ -21,10 +21,10 @@
     "unknown": "未知"
   },
   "configurationPage": {
-    "LLM Configuration": "LLM配置",
+    "LLM Configuration": "LLM設定",
     "LLM Backend": "LLM後端",
     "Language": "語言",
-    "API Key Configuration": "API金鑰配置",
+    "API Key Configuration": "API金鑰設定",
     "OpenAI API Key": "OpenAI API金鑰",
     "For Ollama, set API key to 'ollama'": "對於Ollama，將API金鑰設定為'ollama'",
     "Enter your OpenAI API key": "輸入您的OpenAI API金鑰",
@@ -34,12 +34,12 @@
     "Enter your Google API key": "輸入您的Google API金鑰",
     "Anthropic API Key (Optional)": "Anthropic API金鑰（可選）",
     "Enter your Anthropic API key": "輸入您的Anthropic API金鑰",
-    "Ollama Configuration": "Ollama配置",
+    "Ollama Configuration": "Ollama設定",
     "Custom LLM Backend (For Ollama)": "自定義LLM後端（適用於Ollama）",
     "Enter your custom model string (optional)": "輸入您的自定義模型字串（可選）",
     "Custom Max Tokens for Ollama": "Ollama的自定義最大令牌數",
     "Instructions for Use:": "使用說明:",
-    "Fill in the research configuration.": "填寫研究配置.",
+    "Fill in the research configuration.": "填寫研究設定.",
     "Optionally load a previous research state.": "（可選）載入先前的研究狀態.",
     "For standard models select from the LLM dropdown.": "對於標準模型：從LLM下拉式選單中選擇.",
     "For Ollama set API key to 'ollama'.": "對於Ollama：將API金鑰設定為'ollama'.",
@@ -62,10 +62,10 @@
     "Load Existing Research State": "載入現有研究狀態",
     "Start Research in Terminal": "在終端中開始研究",
     "Status": "狀態",
-    "Configure Task Notes": "配置任務備註（{{count}}）"
+    "Configure Task Notes": "設定任務備註（{{count}}）"
   },
   "taskNotes": {
-    "title": "任務備註配置",
+    "title": "任務備註設定",
     "guidanceTooltip": "任務備註在研究特定階段為代理提供指導",
     "viewJsonTooltip": "檢視JSON資料結構",
     "availableVariables": "可用變數（在備註內容中使用）",
@@ -79,13 +79,13 @@
     "enterNoteContent": "輸入備註內容，可使用變數如{{research_topic}}",
     "jsonPreviewTitle": "任務備註JSON預覽",
     "close": "關閉",
-    "researchTopic": "配置中的研究主題",
-    "apiKey": "配置中的OpenAI API金鑰",
-    "deepseekApiKey": "配置中的DeepSeek API金鑰",
-    "googleApiKey": "配置中的Google API金鑰",
-    "anthropicApiKey": "配置中的Anthropic API金鑰",
-    "language": "配置中的語言",
-    "llmBackend": "配置中的LLM後端",
+    "researchTopic": "設定中的研究主題",
+    "apiKey": "設定中的OpenAI API金鑰",
+    "deepseekApiKey": "設定中的DeepSeek API金鑰",
+    "googleApiKey": "設定中的Google API金鑰",
+    "anthropicApiKey": "設定中的Anthropic API金鑰",
+    "language": "設定中的語言",
+    "llmBackend": "設定中的LLM後端",
     "appliesTo": "適用於 {{count}}/{{total}} 個階段",
     "phases": {
       "planformulation": "計劃制定",
