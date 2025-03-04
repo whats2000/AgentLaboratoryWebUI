@@ -128,24 +128,27 @@ const ConfigurationPage: React.FC = () => {
   }, [form, messageApi, t]);
 
   // Handle form submission
-  const handleStartResearch = (values: FormValues): void => {
+  const handleStartResearch = (): void => {
+    // Ensure we have all form values by getting the latest values directly from the form
+    const currentValues: FormValues = form.getFieldsValue(true);
+
     const payload: ResearchPayload = {
-      research_topic: values.researchTopic,
-      api_key: values.apiKey,
-      deepseek_api_key: values.deepseekApiKey,
-      google_api_key: values.googleApiKey,
-      anthropic_api_key: values.anthropicApiKey,
-      llm_backend: values.llmBackend,
-      custom_llm_backend: values.customLlmBackend,
-      ollama_max_tokens: values.ollamaMaxTokens,
-      language: values.language,
-      copilot_mode: values.copilotMode,
-      compile_latex: values.compileLatex,
-      num_papers_lit_review: values.numPapersLitReview,
-      mlesolver_max_steps: values.mlesolverMaxSteps,
-      papersolver_max_steps: values.papersolverMaxSteps,
-      load_existing: values.loadExisting,
-      load_existing_path: values.existingSaves,
+      research_topic: currentValues.researchTopic,
+      api_key: currentValues.apiKey,
+      deepseek_api_key: currentValues.deepseekApiKey,
+      google_api_key: currentValues.googleApiKey,
+      anthropic_api_key: currentValues.anthropicApiKey,
+      llm_backend: currentValues.llmBackend,
+      custom_llm_backend: currentValues.customLlmBackend,
+      ollama_max_tokens: currentValues.ollamaMaxTokens,
+      language: currentValues.language,
+      copilot_mode: currentValues.copilotMode,
+      compile_latex: currentValues.compileLatex,
+      num_papers_lit_review: currentValues.numPapersLitReview,
+      mlesolver_max_steps: currentValues.mlesolverMaxSteps,
+      papersolver_max_steps: currentValues.papersolverMaxSteps,
+      load_existing: currentValues.loadExisting,
+      load_existing_path: currentValues.existingSaves,
     };
 
     postResearch(payload)
@@ -171,33 +174,30 @@ const ConfigurationPage: React.FC = () => {
       });
   };
 
-  // Add auto-save functionality
-  const debouncedSave = useCallback(
-    debounce((values: FormValues) => {
-      const payload: ResearchPayload = {
-        research_topic: values.researchTopic,
-        api_key: values.apiKey,
-        deepseek_api_key: values.deepseekApiKey,
-        google_api_key: values.googleApiKey,
-        anthropic_api_key: values.anthropicApiKey,
-        llm_backend: values.llmBackend,
-        custom_llm_backend: values.customLlmBackend,
-        ollama_max_tokens: values.ollamaMaxTokens,
-        language: values.language,
-        copilot_mode: values.copilotMode,
-        compile_latex: values.compileLatex,
-        num_papers_lit_review: values.numPapersLitReview,
-        mlesolver_max_steps: values.mlesolverMaxSteps,
-        papersolver_max_steps: values.papersolverMaxSteps,
-        load_existing: values.loadExisting,
-        load_existing_path: values.existingSaves,
-      };
-      saveSettings(payload).catch((err: Error) => {
-        console.error('Failed to auto-save settings:', err);
-      });
-    }, 5000),
-    [],
-  );
+  // Add auto-save capability
+  const debouncedSave = debounce((values: FormValues) => {
+    const payload: ResearchPayload = {
+      research_topic: values.researchTopic,
+      api_key: values.apiKey,
+      deepseek_api_key: values.deepseekApiKey,
+      google_api_key: values.googleApiKey,
+      anthropic_api_key: values.anthropicApiKey,
+      llm_backend: values.llmBackend,
+      custom_llm_backend: values.customLlmBackend,
+      ollama_max_tokens: values.ollamaMaxTokens,
+      language: values.language,
+      copilot_mode: values.copilotMode,
+      compile_latex: values.compileLatex,
+      num_papers_lit_review: values.numPapersLitReview,
+      mlesolver_max_steps: values.mlesolverMaxSteps,
+      papersolver_max_steps: values.papersolverMaxSteps,
+      load_existing: values.loadExisting,
+      load_existing_path: values.existingSaves,
+    };
+    saveSettings(payload).catch((err: Error) => {
+      console.error('Failed to auto-save settings:', err);
+    });
+  }, 5000);
 
   // Watch form changes for auto-save
   const handleFormChange = useCallback(() => {
@@ -220,6 +220,7 @@ const ConfigurationPage: React.FC = () => {
         layout='vertical'
         onFinish={handleStartResearch}
         onValuesChange={handleFormChange}
+        preserve={true}
       >
         <Row gutter={24}>
           {/* Left Column: Basic Configuration */}
@@ -275,6 +276,7 @@ const ConfigurationPage: React.FC = () => {
                     placeholder={t(
                       'configurationPage.Enter your OpenAI API key',
                     )}
+                    autoComplete='off'
                   />
                 </Form.Item>
 
@@ -286,6 +288,7 @@ const ConfigurationPage: React.FC = () => {
                     placeholder={t(
                       'configurationPage.Enter your DeepSeek API key',
                     )}
+                    autoComplete='off'
                   />
                 </Form.Item>
 
@@ -297,6 +300,7 @@ const ConfigurationPage: React.FC = () => {
                     placeholder={t(
                       'configurationPage.Enter your Google API key',
                     )}
+                    autoComplete='off'
                   />
                 </Form.Item>
 
@@ -308,6 +312,7 @@ const ConfigurationPage: React.FC = () => {
                     placeholder={t(
                       'configurationPage.Enter your Anthropic API key',
                     )}
+                    autoComplete='off'
                   />
                 </Form.Item>
               </Panel>
