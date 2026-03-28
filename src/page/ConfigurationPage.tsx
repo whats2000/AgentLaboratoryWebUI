@@ -28,6 +28,7 @@ import {
 } from '@/types';
 import { TaskNote } from '@/types/taskNotes';
 import {
+  getModels,
   getSaves,
   getSettings,
   getTaskNotes,
@@ -75,6 +76,7 @@ const ConfigurationPage: React.FC = () => {
   const [messageApi] = message.useMessage();
   const [form] = Form.useForm<FormValues>();
   const [savedStates, setSavedStates] = useState<string[]>([]);
+  const [models, setModels] = useState<string[]>(AVAILABLE_MODELS);
   const [status, setStatus] = useState<string>('');
   const [taskNotes, setTaskNotes] = useState<TaskNote[]>([]);
   const [taskNoteDrawerVisible, setTaskNoteDrawerVisible] =
@@ -124,6 +126,16 @@ const ConfigurationPage: React.FC = () => {
       .catch((err: Error) => {
         console.error(err);
         void messageApi.error('Failed to load task notes');
+      });
+
+    getModels()
+      .then((fetchedModels: string[]) => {
+        if (fetchedModels.length > 0) {
+          setModels(fetchedModels);
+        }
+      })
+      .catch((err: Error) => {
+        console.error('Failed to fetch models, using defaults:', err);
       });
   }, [form, messageApi, t]);
 
@@ -238,7 +250,7 @@ const ConfigurationPage: React.FC = () => {
                   name='llmBackend'
                 >
                   <Select
-                    options={AVAILABLE_MODELS.map((model) => ({
+                    options={models.map((model: string) => ({
                       label: model,
                       value: model,
                     }))}

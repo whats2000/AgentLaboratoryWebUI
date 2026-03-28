@@ -77,6 +77,18 @@ export const postResearch = async (
   return response.data;
 };
 
+export const getModels = async (): Promise<string[]> => {
+  try {
+    const response = await axios.get<{ models: string[] }>(
+      `${API_URL}/api/models`,
+    );
+    return response.data.models;
+  } catch (error) {
+    console.error('Error fetching models:', error);
+    return [];
+  }
+};
+
 export const updateWebUI = async () => {
   try {
     await axios.post(`${API_URL}/api/updateWebUI`);

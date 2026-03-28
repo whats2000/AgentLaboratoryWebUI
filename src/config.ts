@@ -4,6 +4,7 @@ export const API_URL =
 export const VERSION_FILE_URL =
   'https://whats2000.github.io/AgentLaboratoryWebUI/version.json';
 
+// Fallback model list — used when backend /api/models is unreachable
 export const AVAILABLE_MODELS = [
   // OpenAI o-series (reasoning models)
   'o1',
